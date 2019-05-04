@@ -26,31 +26,31 @@ init() ->
 loop(Monitor) ->
   receive
     {request, Pid, {addStation,Name, Coords}} ->
-      Pid ! {replay, ok},
+      Pid ! {reply, ok},
       loop(pollution:addStation(Name, Coords, Monitor));
 
     {request, Pid, {addValue,Attr, Date, Type, Value}} ->
-      Pid ! {replay, ok},
+      Pid ! {reply, ok},
       loop(pollution:addValue(Attr, Date, Type, Value, Monitor));
 
     {request, Pid, {removeValue,Attr, Date, Type}} ->
-      Pid ! {replay, ok},
+      Pid ! {reply, ok},
       loop(pollution:removeValue(Attr, Date, Type, Monitor));
 
     {request, Pid, {getOneValue,Attr, Date, Type}} ->
-      Pid ! {replay, ok},
+      Pid ! {reply, ok},
       loop(pollution:getOneValue(Attr, Date, Type, Monitor));
 
     {request, Pid, {getStationMean,Attr, Type}} ->
-      Pid ! {replay, ok},
+      Pid ! {reply, ok},
       loop(pollution:getStationMean(Attr, Type, Monitor));
 
     {request, Pid, {getDailyMean,Date, Type}} ->
-      Pid ! {replay, ok},
+      Pid ! {reply, ok},
       loop(pollution:getDailyMean(Date, Type, Monitor));
 
     {request, Pid, {getAreaMean,Attr, Type, Radius}} ->
-      Pid ! {replay, ok},
+      Pid ! {reply, ok},
       loop(pollution:getAreaMean(Attr, Type, Radius, Monitor))
   end.
 
