@@ -61,6 +61,7 @@ getOneValue(Attribute, Date, Type, Monitor) ->
   Key = getKey(Attribute,Monitor),
   Readings = getReadings(Key,Monitor#monitor.pollutionParameters),
   V = maps:get({Type,Date}, Readings, "default"),
+  io:fwrite("~w~n",[V]),
   case V of
     "default" -> error("No such reading");
     _ -> V

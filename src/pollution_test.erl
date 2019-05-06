@@ -21,21 +21,21 @@ addStation_test() ->
   #monitor{stationAttributes = #{"Warszawa" => {52,21}},
     pollutionParameters = #{{52,21} => #{}}}).
 
-%%addValue_test() ->
-%%  ?assert(
-%%    pollution:addValue("Warszawa", {{2019,5,3},{14,0,0}}, "pm10", 10,
-%%      #monitor{stationAttributes = #{"Warszawa" => {51,21}}, pollutionParameters = #{{52,21} => #{}}}) ==
-%%      #monitor{stationAttributes = #{"Warszawa" => {52,21}},
-%%        pollutionParameters = #{{52,21} => #{{"pm10",{{2019,5,3},{14,0,0}}} => 10}}}
-%%  ).
+addValue_test() ->
+  ?assert(
+    pollution:addValue("Warszawa", {{2019,5,3},{14,0,0}}, "pm10", 10,
+      #monitor{stationAttributes = #{"Warszawa" => {52,21}}, pollutionParameters = #{{52,21} => #{}}}) ==
+      #monitor{stationAttributes = #{"Warszawa" => {52,21}},
+        pollutionParameters = #{{52,21} => #{{"pm10",{{2019,5,3},{14,0,0}}} => 10}}}
+  ).
 
-%%removeValue_test() ->
-%%  ?assert(
-%%    pollution:removeValue("Warszawa", {{2019,5,3},{14,0,0}}, "pm10",
-%%      #monitor{stationAttributes = #{"Warszawa" => {51,21}}, pollutionParameters = #{{52,21} => #{{"pm10",{{2019,5,3},{14,0,0}}} => 10}}}) ==
-%%      #monitor{stationAttributes = #{"Warszawa" => {52,21}},
-%%        pollutionParameters = #{{52,21} => #{}}}
-%%  ).
+removeValue_test() ->
+  ?assert(
+    pollution:removeValue("Warszawa", {{2019,5,3},{14,0,0}}, "pm10",
+      #monitor{stationAttributes = #{"Warszawa" => {52,21}}, pollutionParameters = #{{52,21} => #{{"pm10",{{2019,5,3},{14,0,0}}} => 10}}}) ==
+      #monitor{stationAttributes = #{"Warszawa" => {52,21}},
+        pollutionParameters = #{{52,21} => #{}}}
+  ).
 
 getMonitor() -> {monitor,
   #{"Krakow" => {50,20},

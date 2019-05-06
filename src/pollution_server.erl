@@ -38,20 +38,20 @@ loop(Monitor) ->
       loop(pollution:removeValue(Attr, Date, Type, Monitor));
 
     {request, Pid, {getOneValue,Attr, Date, Type}} ->
-      Pid ! {reply, ok},
-      loop(pollution:getOneValue(Attr, Date, Type, Monitor));
+      Pid ! {reply, pollution:getOneValue(Attr, Date, Type, Monitor)},
+      loop(Monitor);
 
     {request, Pid, {getStationMean,Attr, Type}} ->
-      Pid ! {reply, ok},
-      loop(pollution:getStationMean(Attr, Type, Monitor));
+      Pid ! {reply, pollution:getStationMean(Attr, Type, Monitor)},
+      loop(Monitor);
 
     {request, Pid, {getDailyMean,Date, Type}} ->
-      Pid ! {reply, ok},
-      loop(pollution:getDailyMean(Date, Type, Monitor));
+      Pid ! {reply, pollution:getDailyMean(Date, Type, Monitor)},
+      loop(Monitor);
 
     {request, Pid, {getAreaMean,Attr, Type, Radius}} ->
-      Pid ! {reply, ok},
-      loop(pollution:getAreaMean(Attr, Type, Radius, Monitor))
+      Pid ! {reply, pollution:getAreaMean(Attr, Type, Radius, Monitor)},
+      loop(Monitor)
   end.
 
 call(Message) ->
@@ -79,4 +79,4 @@ getDailyMean(Date, Type) ->
   call({getDailyMean, Date, Type}).
 
 getAreaMean(Attr, Type, Radius) ->
-  call({addValue,Attr, Type, Radius}).
+  call({getAreaMean,Attr, Type, Radius}).
