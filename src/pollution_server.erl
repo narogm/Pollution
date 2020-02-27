@@ -10,7 +10,7 @@
 -author("Mateusz").
 
 %% API
--export([start/0,stop/0,addStation/2,addValue/4,removeValue/3,getOneValue/3,getStationMean/2, getDailyMean/2, getAreaMean/3]).
+-export([start/0,stop/0,init/0,addStation/2,addValue/4,removeValue/3,getOneValue/3,getStationMean/2, getDailyMean/2, getAreaMean/3, crash/0]).
 
 start() ->
   Pid = spawn(fun() -> init() end),
@@ -51,7 +51,9 @@ loop(Monitor) ->
 
     {request, Pid, {getAreaMean,Attr, Type, Radius}} ->
       Pid ! {reply, pollution:getAreaMean(Attr, Type, Radius, Monitor)},
-      loop(Monitor)
+      loop(Monitor);
+    crash ->
+      1/0
   end.
 
 call(Message) ->
@@ -80,3 +82,6 @@ getDailyMean(Date, Type) ->
 
 getAreaMean(Attr, Type, Radius) ->
   call({getAreaMean,Attr, Type, Radius}).
+
+crash() ->
+  monitor ! crash.
